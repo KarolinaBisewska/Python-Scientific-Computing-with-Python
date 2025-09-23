@@ -1,2 +1,2 @@
-# Cryptography
-Exercises and Projects for Quantum Computing focused on Cryptography 
+# Python coding exercises
+Collection of Python coding exercises for learning and practicing programming concepts, including basic algorithms, string manipulation, and simple cryptography examples.
