@@ -32,6 +32,7 @@ class Board:
         valid_in_col = self.valid_in_col(col, num)
         valid_in_square = self.valid_in_square(row, col, num)
         return all([valid_in_row, valid_in_col, valid_in_square])
+
     def solver(self):
         if (next_empty := self.find_empty_cell()) is None:
             return True
@@ -42,6 +43,12 @@ class Board:
                 if self.solver():
                     return True
                 self.board[row][col] = 0
+        return False
+def solve_sudoku(board):
+    gameboard = Board(board)
+    print(f'Puzzle to solve:\n{gameboard}')
+    if gameboard.solver():
+        print(f'Solved puzzle:\n{gameboard}')
 puzzle = [
   [0, 0, 2, 0, 0, 8, 0, 0, 0],
   [0, 0, 0, 0, 0, 3, 7, 6, 2],
