@@ -48,6 +48,13 @@ class BinarySearchTree:
         else:
             if node.left is None:
                 return node.right
+            elif node.right is None:
+                return node.left    
+             
+    def _min_value(self, node):
+        while node.left is not None:
+            node = node.left
+            
 
 
 bst = BinarySearchTree()
@@ -56,5 +63,6 @@ nodes = [50, 30, 20, 40, 70, 60, 80]
 
 for node in nodes:
     bst.insert(node)
-    
+
 # print('Search for 80:', bst.search(80))
+
