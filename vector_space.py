@@ -4,4 +4,11 @@ class Vector:
         self.y = y
         
     def norm(self):
-        pass
+        return (self.x**2 + self.y**2)**0.5
+        
+    def __str__(self):
+        return f'{self.x, self.y}'
+
+v1 = Vector(2, 3)
+print(v1.norm())
+print(v1)
