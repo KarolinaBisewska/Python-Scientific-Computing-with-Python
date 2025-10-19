@@ -13,7 +13,9 @@ class R2Vector:
         arg_list = [f'{key}={val}' for key, val in vars(self).items()]
         args = ', '.join(arg_list)
         return f'{self.__class__.__name__}({args})'
-    
+    def __getattr__(self, attr):                
+        return 'calling __getattr__'
+        
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
@@ -23,3 +25,5 @@ v1 = R2Vector(x=2, y=3)
 v2 = R3Vector(x=2, y=2, z=3)
 # print(f'v1 = {v1}', f'\nrepr = {repr(v1)}')
 # print(f'v2 = {v2}', f'\nrepr = {repr(v2)}')
+print(v1.z)
+print(getattr(v1, 'z'))
