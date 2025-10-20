@@ -16,6 +16,7 @@ class R2Vector:
     def __add__(self, other):
         if type(self) != type(other):
             return NotImplemented
+        kwargs = {i: getattr(self, i) + getattr(other, i) for i in vars(self)}
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
