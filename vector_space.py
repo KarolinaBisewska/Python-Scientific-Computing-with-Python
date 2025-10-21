@@ -26,7 +26,10 @@ class R2Vector:
         kwargs = {i: getattr(self, i) - getattr(other, i) for i in vars(self)}
         return self.__class__(**kwargs)
     def __mul__(self, other):
-        pass
+        if type(other) is int or type(other) is float:
+            kwargs = {name: value * other for name, value in vars(self).items()}
+        return self.__class__(**kwargs)
+        
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
