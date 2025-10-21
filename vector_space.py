@@ -13,16 +13,26 @@ class R2Vector:
         arg_list = [f'{key}={val}' for key, val in vars(self).items()]
         args = ', '.join(arg_list)
         return f'{self.__class__.__name__}({args})'
+
     def __add__(self, other):
         if type(self) != type(other):
             return NotImplemented
         kwargs = {i: getattr(self, i) + getattr(other, i) for i in vars(self)}
+        return self.__class__(**kwargs)
+
+    def __sub__(self, other):
+        if type(self) != type(other):
+            return NotImplemented
+        kwargs = {i: getattr(self, i) - getattr(other, i) for i in vars(self)}
+        return self.__class__(**kwargs)
+
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
         self.z = z
-
 v1 = R2Vector(x=2, y=3)
-v2 = R3Vector(x=2, y=2, z=3)
+v2 = R2Vector(x=0.5, y=1.25)
 print(f'v1 = {v1}')
 print(f'v2 = {v2}')
+v3 = v1 + v2
+print(f'v1 + v2 = {v3}')
