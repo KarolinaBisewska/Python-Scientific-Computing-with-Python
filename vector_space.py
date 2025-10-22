@@ -34,11 +34,15 @@ class R2Vector:
             args = [getattr(self, i) * getattr(other, i) for i in vars(self)]
             return sum(args)            
         return NotImplemented
-
+    def __eq__(self, other):
+        if type(self) != type(other):
+            return NotImplemented
+        return all(getattr(self, i) == getattr(other, i) for i in vars(self))
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
         self.z = z
+
 v1 = R2Vector(x=2, y=3)
 v2 = R2Vector(x=0.5, y=1.25)
 print(f'v1 = {v1}')
@@ -47,5 +51,5 @@ v3 = v1 + v2
 print(f'v1 + v2 = {v3}')
 v4 = v1 - v2
 print(f'v1 - v2 = {v4}')
-v5 = v1 * 3
-print(f'v1 * 3 = {v5}')
+v5 = v1 * v2
+print(f'v1 * v2 = {v5}')
