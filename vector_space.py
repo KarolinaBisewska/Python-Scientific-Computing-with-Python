@@ -25,16 +25,20 @@ class R2Vector:
             return NotImplemented
         kwargs = {i: getattr(self, i) - getattr(other, i) for i in vars(self)}
         return self.__class__(**kwargs)
+
     def __mul__(self, other):
-        if type(other) is int or type(other) is float:
-            kwargs = {name: value * other for name, value in vars(self).items()}
-        return self.__class__(**kwargs)
-        
+        if type(other) in (int, float):
+            kwargs = {i: getattr(self, i) * other for i in vars(self)}
+            return self.__class__(**kwargs)        
+        elif type(self) == type(other):
+            args = [getattr(self, i) * getattr(other, i) for i in vars(self)]
+            return sum(args)            
+        return NotImplemented
+
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
         self.z = z
-
 v1 = R2Vector(x=2, y=3)
 v2 = R2Vector(x=0.5, y=1.25)
 print(f'v1 = {v1}')
@@ -43,3 +47,5 @@ v3 = v1 + v2
 print(f'v1 + v2 = {v3}')
 v4 = v1 - v2
 print(f'v1 - v2 = {v4}')
+v5 = v1 * 3
+print(f'v1 * 3 = {v5}')
