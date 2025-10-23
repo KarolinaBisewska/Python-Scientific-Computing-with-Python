@@ -51,6 +51,12 @@ class R2Vector:
         if type(self) != type(other):
             return NotImplemented
         return self.norm() > other.norm()
+    
+    def __le__(self, other):
+        if type(self) != type(other):
+            return NotImplemented
+        return self.norm() <= other.norm()
+
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
