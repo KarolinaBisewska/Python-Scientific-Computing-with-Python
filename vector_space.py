@@ -42,6 +42,7 @@ class R2Vector:
         
     def __ne__(self, other):
         return not self == other
+
     def __lt__(self, other):
         if type(self) != type(other):
             return NotImplemented
@@ -51,17 +52,17 @@ class R2Vector:
         if type(self) != type(other):
             return NotImplemented
         return self.norm() > other.norm()
-    
+
     def __le__(self, other):
-        if type(self) != type(other):
-            return NotImplemented
-        return self.norm() <= other.norm()
+        return not self > other
+
+    def __ge__(self, other):
+        return not self < other
 
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
         self.z = z
-
 v1 = R2Vector(x=2, y=3)
 v2 = R2Vector(x=0.5, y=1.25)
 print(f'v1 = {v1}')
