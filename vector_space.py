@@ -58,11 +58,14 @@ class R2Vector:
 
     def __ge__(self, other):
         return not self < other
-
 class R3Vector(R2Vector):
     def __init__(self, *, x, y, z):
         super().__init__(x=x, y=y)
         self.z = z
+        
+    def cross(self, other):
+        if type(self) != type(other):
+            return NotImplemented
 v1 = R2Vector(x=2, y=3)
 v2 = R2Vector(x=0.5, y=1.25)
 print(f'v1 = {v1}')
@@ -73,4 +76,3 @@ v4 = v1 - v2
 print(f'v1 - v2 = {v4}')
 v5 = v1 * v2
 print(f'v1 * v2 = {v5}')
-print(v1 != R2Vector(x=2, y=3))
