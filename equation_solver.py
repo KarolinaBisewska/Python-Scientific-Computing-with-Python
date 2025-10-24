@@ -1,10 +1,17 @@
 from abc import ABC, abstractmethod
 
+
 class Equation(ABC):
     degree: int
-    def __init__(self, *args):
-        pass        
     
+    def __init__(self, *args):
+        if (self.degree + 1) != len(args):
+            raise TypeError(
+                f"'{self.__class__.__name__}' object takes {self.degree + 1} positional arguments but {len(args)} were given"
+            )
+        for arg in args:
+            if not isinstance(arg, (int, float)):
+                raise TypeError("Coefficients must be of type 'int' or 'float'")
     def __init_subclass__(cls):
         if not hasattr(cls, "degree"):
             raise AttributeError(
@@ -28,4 +35,4 @@ class LinearEquation(Equation):
     def analyze(self):
         pass
     
-lin_eq = LinearEquation()
+lin_eq = LinearEquation(2, 3)
