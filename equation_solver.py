@@ -1,22 +1,29 @@
 from abc import ABC, abstractmethod
 
-
 class Equation(ABC):
     degree: int
     
     def __init__(self, *args):
         if (self.degree + 1) != len(args):
             raise TypeError(
-                f"'{self.__class__.__name__}' object takes {self.degree + 1} positional arguments but {len(args)} were given"
+                f"'Equation' object takes {self.degree + 1} positional arguments but {len(args)} were given"
             )
-        for arg in args:
-            if not isinstance(arg, (int, float)):
-                raise TypeError("Coefficients must be of type 'int' or 'float'")
+        if any(not isinstance(arg, (int, float)) for arg in args):
+            raise TypeError("Coefficients must be of type 'int' or 'float'")
+        if args[0] == 0:
+            raise ValueError("Highest degree coefficient must be different from zero")
+        self.coefficients = {(len(args) - n - 1): arg for n, arg in enumerate(args)}
+
     def __init_subclass__(cls):
         if not hasattr(cls, "degree"):
             raise AttributeError(
                 f"Cannot create '{cls.__name__}' class: missing required attribute 'degree'"
             )
+    def __str__(self):
+        terms = []
+        
+        equation_string = ' '.join(terms)
+        return equation_string        
     
     @abstractmethod
     def solve(self):
@@ -34,5 +41,7 @@ class LinearEquation(Equation):
     
     def analyze(self):
         pass
-    
+
+
 lin_eq = LinearEquation(2, 3)
+print(lin_eq)
