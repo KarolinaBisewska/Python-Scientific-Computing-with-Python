@@ -21,10 +21,11 @@ class Equation(ABC):
             )
     def __str__(self):
         terms = []
-        
+        for n, coefficient in self.coefficients.items():
+            if not coefficient:
+                continue
         equation_string = ' '.join(terms)
-        return equation_string        
-    
+        return equation_string
     @abstractmethod
     def solve(self):
         pass
@@ -41,7 +42,6 @@ class LinearEquation(Equation):
     
     def analyze(self):
         pass
-
-
+    
 lin_eq = LinearEquation(2, 3)
 print(lin_eq)
