@@ -52,8 +52,16 @@ class LinearEquation(Equation):
         slope, intercept = self.coefficients.values()
         return {'slope': slope, 'intercept': intercept}
 
+class QuadraticEquation(Equation):
+    degree = 2
+    def __init__(self, *args):
+        super().__init__(*args)
+        delta = b**2 - 4*a*c
+    def solve(self):
+        pass
+    
+    def analyze(self):
+        pass
 
 lin_eq = LinearEquation(2, 3)
 print(lin_eq)
-print(lin_eq.solve())
-print(lin_eq.analyze())
