@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class Equation(ABC):
     degree: int
-    
+  
     def __init__(self, *args):
         if (self.degree + 1) != len(args):
             raise TypeError(
@@ -24,8 +24,12 @@ class Equation(ABC):
         for n, coefficient in self.coefficients.items():
             if not coefficient:
                 continue
+            if n == 0:
+                terms.append(f'{coefficient}')
         equation_string = ' '.join(terms)
         return equation_string
+        
+    
     @abstractmethod
     def solve(self):
         pass
