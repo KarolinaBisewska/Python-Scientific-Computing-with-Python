@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import re
+
 
 class Equation(ABC):
     degree: int
@@ -32,8 +34,7 @@ class Equation(ABC):
             else:
                 terms.append(f"{coefficient:+}x**{n}")
         equation_string = ' '.join(terms) + ' = 0'
-        return equation_string.strip('+')        
-    
+        return re.sub('1', '',equation_string.strip('+'))        
     @abstractmethod
     def solve(self):
         pass
