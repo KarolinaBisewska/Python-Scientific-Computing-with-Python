@@ -28,7 +28,9 @@ class Equation(ABC):
             if n == 0:
                 terms.append(f'{coefficient:+}')
             elif n == 1:
-                terms.append(f'{coefficient:+}x')                
+                terms.append(f'{coefficient:+}x')
+            else:
+                terms.append(f"{coefficient:+}x**{n}")
         equation_string = ' '.join(terms) + ' = 0'
         return equation_string.strip('+')        
     
@@ -54,14 +56,20 @@ class LinearEquation(Equation):
 
 class QuadraticEquation(Equation):
     degree = 2
+
     def __init__(self, *args):
         super().__init__(*args)
-        delta = b**2 - 4*a*c
+        a, b, c = self.coefficients.values()
+        self.delta = b**2 - 4 * a * c
+   
     def solve(self):
         pass
     
     def analyze(self):
         pass
 
+
 lin_eq = LinearEquation(2, 3)
 print(lin_eq)
+quadr_eq = QuadraticEquation(11, -1, 1)
+print(quadr_eq)
