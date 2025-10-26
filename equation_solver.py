@@ -34,7 +34,8 @@ class Equation(ABC):
             else:
                 terms.append(f"{coefficient:+}x**{n}")
         equation_string = ' '.join(terms) + ' = 0'
-        return re.sub(r'(?<!\d)1', '', equation_string.strip('+'))        
+        return re.sub(r"(?<!\d)1(?=x)", "", equation_string.strip("+"))        
+
     @abstractmethod
     def solve(self):
         pass
@@ -62,10 +63,13 @@ class QuadraticEquation(Equation):
         super().__init__(*args)
         a, b, c = self.coefficients.values()
         self.delta = b**2 - 4 * a * c
-   
     def solve(self):
-        pass
-    
+        if self.delta < 0:
+            return []
+        a, b, c = self.coefficients.values()
+        root1 = (-b + (self.delta ** 0.5)) / (2 * a)
+        root2 = (-b - (self.delta ** 0.5)) / (2 * a)
+        return [root1, root2]
     def analyze(self):
         pass
 
