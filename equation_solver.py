@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import re
 
+
 class Equation(ABC):
     degree: int
     type: str
@@ -25,7 +26,7 @@ class Equation(ABC):
             raise AttributeError(
                 f"Cannot create '{cls.__name__}' class: missing required attribute 'type'"
             )
-
+            
     def __str__(self):
         terms = []
         for n, coefficient in self.coefficients.items():
@@ -47,10 +48,12 @@ class Equation(ABC):
     @abstractmethod
     def analyze(self):
         pass
-        
+
+
 class LinearEquation(Equation):
     degree = 1
     type = 'Linear Equation'
+    
     def solve(self):
         a, b = self.coefficients.values()
         x = -b / a
@@ -60,9 +63,11 @@ class LinearEquation(Equation):
         slope, intercept = self.coefficients.values()
         return {'slope': slope, 'intercept': intercept}
 
+
 class QuadraticEquation(Equation):
     degree = 2
     type = 'Quadratic Equation'
+
     def __init__(self, *args):
         super().__init__(*args)
         a, b, c = self.coefficients.values()
@@ -91,10 +96,17 @@ class QuadraticEquation(Equation):
             min_max = 'max'
         return {'x': x, 'y': y, 'min_max': min_max, 'concavity': concavity}
 
+
 def solver(equation):
     if not isinstance(equation, Equation):
         raise TypeError("Argument must be an Equation object")
-
+    output_string = f'\n{equation.type:-^24}'
+    equation_str = f'\n\n{equation!s:^24}\n\n'
+    output_string += equation_str
+    
+    return output_string
+    return output_string
 
 lin_eq = LinearEquation(2, 3)
 quadr_eq = QuadraticEquation(1, 2, 1)
+print(solver(lin_eq))
