@@ -26,7 +26,7 @@ class Equation(ABC):
             raise AttributeError(
                 f"Cannot create '{cls.__name__}' class: missing required attribute 'type'"
             )
-            
+
     def __str__(self):
         terms = []
         for n, coefficient in self.coefficients.items():
@@ -101,10 +101,10 @@ def solver(equation):
     if not isinstance(equation, Equation):
         raise TypeError("Argument must be an Equation object")
     output_string = f'\n{equation.type:-^24}'
-    equation_str = f'\n\n{equation!s:^24}\n\n'
-    output_string += equation_str
+    output_string += f'\n\n{equation!s:^24}\n\n'
+    output_string += f'{"Solutions":-^24}\n\n'
+    results = equation.solve()
     
-    return output_string
     return output_string
 
 lin_eq = LinearEquation(2, 3)
