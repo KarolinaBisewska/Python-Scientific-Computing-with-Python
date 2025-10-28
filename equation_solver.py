@@ -116,7 +116,15 @@ def solver(equation):
         output_string += f'{result:^24}\n'
     output_string += f'\n{"Details":-^24}\n\n'
     details = equation.analyze()
-    
+    match details:
+        case {'slope': slope, 'intercept': intercept}:
+            details_list = [f'slope = {slope:.3f}', f'y-intercept = {intercept:.3f}']
+        case {'concavity': concavity, 'vertex': (x, y)}:
+            min_max = 'minimum' if 'up' in concavity.lower() else 'maximum'
+            details_list = [f'concavity = {concavity}', f'{min_max} = ({x:.3f}, {y:.3f})']
+
+    for item in details_list:
+        output_string += item + '\n'
     return output_string
 
 lin_eq = LinearEquation(2, 3)
