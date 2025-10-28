@@ -118,15 +118,13 @@ def solver(equation):
     details = equation.analyze()
     match details:
         case {'slope': slope, 'intercept': intercept}:
-            details_list = [f'slope = {slope:.3f}', f'y-intercept = {intercept:.3f}']
-        case {'concavity': concavity, 'vertex': (x, y)}:
-            min_max = 'minimum' if 'up' in concavity.lower() else 'maximum'
-            details_list = [f'concavity = {concavity}', f'{min_max} = ({x:.3f}, {y:.3f})']
-
-    for item in details_list:
-        output_string += item + '\n'
+            details_list = [f'slope = {slope:>16.3f}', f'y-intercept = {intercept:>10.3f}']
+        case {'x': x, 'y': y, 'min_max': min_max, 'concavity': concavity}:
+            coord = f'({x:.3f}, {y:.3f})'
+            details_list = [f'concavity = {concavity}', f'{min_max} = {coord}']
+    for detail in details_list:
+        output_string += f'{detail}\n'
     return output_string
-
 lin_eq = LinearEquation(2, 3)
 quadr_eq = QuadraticEquation(1, 2, 1)
-print(solver(lin_eq))
+print(solver(quadr_eq))
