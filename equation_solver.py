@@ -105,15 +105,18 @@ def solver(equation):
     output_string += f'\n\n{equation!s:^24}\n\n'
     output_string += f'{"Solutions":-^24}\n\n'
     results = equation.solve()
-    match len(results):
-        case 0:
+    match results:
+        case []:
             result_list = ['No real roots']
-        case 1:
-            result_list = [f'x = {results[0]:+.3f}']
-        case 2:
-            result_list = [f'x1 = {results[0]:+.3f}', f'x2 = {results[1]:+.3f}']
+        case [x]:
+            result_list = [f'x = {x:+.3f}']
+        case [x1, x2]:
+            result_list = [f'x1 = {x1:+.3f}', f'x2 = {x2:+.3f}']
     for result in result_list:
         output_string += f'{result:^24}\n'
+    output_string += f'\n{"Details":-^24}\n\n'
+    details = equation.analyze()
+    
     return output_string
 
 lin_eq = LinearEquation(2, 3)
