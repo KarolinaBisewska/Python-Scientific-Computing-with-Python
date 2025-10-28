@@ -100,11 +100,21 @@ class QuadraticEquation(Equation):
 def solver(equation):
     if not isinstance(equation, Equation):
         raise TypeError("Argument must be an Equation object")
+
     output_string = f'\n{equation.type:-^24}'
     output_string += f'\n\n{equation!s:^24}\n\n'
     output_string += f'{"Solutions":-^24}\n\n'
     results = equation.solve()
-    
+    match len(results):
+        case 0:
+            result_list = ['No real roots']
+        case 1:
+            result_list = [f'x = {results[0]:+}']
+        case 2:
+            result_list = [
+                f'x1 = {results[0]:+}',
+                f'x2 = {results[1]:+}'
+            ]
     return output_string
 
 lin_eq = LinearEquation(2, 3)
