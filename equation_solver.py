@@ -121,7 +121,10 @@ def solver(equation):
             details_list = [f'slope = {slope:>16.3f}', f'y-intercept = {intercept:>10.3f}']
         case {'x': x, 'y': y, 'min_max': min_max, 'concavity': concavity}:
             coord = f'({x:.3f}, {y:.3f})'
-            details_list = [f'concavity = {concavity}', f'{min_max} = {coord}']
+            details_list = [
+    f'concavity = {concavity:>12}',
+    f'{min_max} = {coord:>18}'
+]
     for detail in details_list:
         output_string += f'{detail}\n'
     return output_string
