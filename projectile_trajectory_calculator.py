@@ -82,11 +82,15 @@ class Graph:
     def __repr__(self):
         return f'Graph({self.__coordinates})'
 
-    
+    def create_coordinates_table(self):
+        table = "\n  x      y\n"
+        for x, y in self.__coordinates:
+            table += f"  {x:1d}   {y:5.2f}\n"
+        return table
 
 
 ball = Projectile(10, 3, 45)
-print(ball)
 coordinates = ball.calculate_all_coordinates()
-
 graph = Graph(coordinates)
+
+print(repr(graph.create_coordinates_table()))
