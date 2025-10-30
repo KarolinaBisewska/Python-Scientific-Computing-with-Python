@@ -57,7 +57,7 @@ displacement: {round(self.__calculate_displacement(), 1)} m
     @property
     def speed(self):
         return self.__speed
-    
+
     @height.setter
     def height(self, n):
         self.__height = n
@@ -69,11 +69,24 @@ displacement: {round(self.__calculate_displacement(), 1)} m
     @speed.setter
     def speed(self, s):
        self.__speed = s
+    
+    def __repr__(self):
+        return f'{self.__class__}({self.speed}, {self.height}, {self.angle})'
+
+class Graph:
+    __slots__ = ('__coordinates')
+
+    def __init__(self, coord):
+        self.__coordinates = coord
+    
+    def __repr__(self):
+        return f'Graph({self.__coordinates})'
 
     
+
 
 ball = Projectile(10, 3, 45)
 print(ball)
 coordinates = ball.calculate_all_coordinates()
 
-   
+graph = Graph(coordinates)
