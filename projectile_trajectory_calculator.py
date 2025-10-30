@@ -32,19 +32,28 @@ displacement: {round(self.__calculate_displacement(), 1)} m
         return horizontal_component * (vertical_component + sqrt_component) / GRAVITATIONAL_ACCELERATION
         
     def __calculate_y_coordinate(self, x):
+        height_component = self.__height
+        angle_component = math.tan(self.__angle) * x
+        acceleration_component = GRAVITATIONAL_ACCELERATION * x ** 2 / (
+                2 * self.__speed ** 2 * math.cos(self.__angle) ** 2)
+        y_coordinate = height_component + angle_component - acceleration_component
+
+        return y_coordinate
     
-        v0 = self.__speed
-        y0 = self.__height
-        θ = self.__angle
-        g = GRAVITATIONAL_ACCELERATION
+    def calculate_all_coordinates(self):
+        return [
+            (x, self.__calculate_y_coordinate(x))
+            for x in range(math.ceil(self.__calculate_displacement()))
+        ]
 
-        term1 = y0
-        term2 = x * math.tan(θ)
-        term3 = (g * x**2) / (2 * v0**2 * math.cos(θ)**2)
+    @property
+    def speed(self):
+        return self.__speed
 
-        return term1 + term2 - term3
-
+    
 
 ball = Projectile(10, 3, 45)
 print(ball)
+coordinates = ball.calculate_all_coordinates()
+
    
